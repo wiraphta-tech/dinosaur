@@ -545,29 +545,6 @@ let timeTimer = null;
 
 const gravity = 0.4;
 
-/* ==========================================
-   Player
-========================================== */
-
-const player = {
-
-    x: 120,
-
-    y: 350,
-
-    width: 60,
-
-    height: 60,
-
-    velocityY: 0,
-
-    jumping: false
-
-};
-
-/* ==========================================
-   Obstacles
-========================================== */
 
 let obstacles = [];
 
@@ -838,20 +815,50 @@ function drawObstacles(){
    Update Physics
 ========================================== */
 
+const groundY = 390;
+
+const player = {
+
+    x: 120,
+
+    y: groundY,
+
+    width: 60,
+
+    height: 60,
+
+    velocityY: 0,
+
+    jumping: false
+
+};
+
 function updatePlayer(){
+
     if(player.velocityY < 0){
-    player.velocityY += 0.35;
-}else{
-    player.velocityY += 0.20;
+        player.velocityY += 0.35;
+    }else{
+        player.velocityY += 0.20;
+    }
+
+    if(player.velocityY > 4){
+        player.velocityY = 4;
+    }
+
+    player.y += player.velocityY;
+
+    if(player.y >= groundY){
+
+        player.y = groundY;
+
+        player.velocityY = 0;
+
+        player.jumping = false;
+
+    }
+
 }
 
-if(player.velocityY > 4){
-    player.velocityY = 4;
-}
-
-player.y += player.velocityY;
-
-}
 
 /* ==========================================
    Update Obstacles
