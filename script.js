@@ -543,7 +543,7 @@ let survivalTime = 0;
 let scoreTimer = null;
 let timeTimer = null;
 
-const gravity = 0.9;
+const gravity = 0.75;
 
 /* ==========================================
    Player
@@ -571,7 +571,7 @@ const player = {
 
 let obstacles = [];
 
-let obstacleSpeed = 8;
+let obstacleSpeed = 3;
 
 let obstacleSpawnTimer = 0;
 
@@ -686,7 +686,7 @@ function jump(){
 
     player.jumping = true;
 
-    player.velocityY = -18;
+    player.velocityY = -15;
 
     jumpSound.currentTime = 0;
 
@@ -868,7 +868,7 @@ function updateObstacles(){
 
     if(
         obstacleSpawnTimer >
-        90
+        150
     ){
 
         obstacleSpawnTimer = 0;
@@ -897,39 +897,48 @@ function updateObstacles(){
 
 function checkCollision(){
 
-    for(
-        let obs of obstacles
-    ){
+for(let obs of obstacles){
 
-        const hit =
+    const playerBox = {
 
-        player.x <
-        obs.x +
-        obs.width &&
+        x: player.x + 10,
+        y: player.y + 10,
+        width: 40,
+        height: 40
 
-        player.x +
-        player.width >
-        obs.x &&
+    };
 
-        player.y <
-        obs.y +
-        obs.height &&
+    const rockBox = {
 
-        player.y +
-        player.height >
-        obs.y;
+        x: obs.x,
+        y: obs.y - 35,
+        width: 35,
+        height: 35
 
-        if(hit){
+    };
 
-            gameOver();
+    const hit =
 
-            return;
+        playerBox.x < rockBox.x + rockBox.width &&
+        playerBox.x + playerBox.width > rockBox.x &&
+        playerBox.y < rockBox.y + rockBox.height &&
+        playerBox.y + playerBox.height > rockBox.y;
 
-        }
+    if(hit){
+
+        console.log("GAME OVER");
+
+        gameOver();
+
+        return;
 
     }
 
 }
+
+
+}
+
 
 /* ==========================================
    Game Over
