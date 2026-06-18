@@ -839,22 +839,17 @@ function drawObstacles(){
 ========================================== */
 
 function updatePlayer(){
+    if(player.velocityY < 0){
+    player.velocityY += 0.35;
+}else{
+    player.velocityY += 0.20;
+}
 
-    player.velocityY +=
-    gravity;
+if(player.velocityY > 4){
+    player.velocityY = 4;
+}
 
-    player.y +=
-    player.velocityY;
-
-    if(player.y >= 350){
-
-        player.y = 350;
-
-        player.velocityY = 0;
-
-        player.jumping = false;
-
-    }
+player.y += player.velocityY;
 
 }
 
