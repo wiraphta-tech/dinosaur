@@ -1150,6 +1150,28 @@ function checkRoomFinished(players){
     }
 
 }
+function checkRestartReady(players){
+
+const list =
+Object.values(players);
+
+const allReady =
+list.every(
+    p => p.ready === true
+);
+
+if(allReady){
+
+    roomRef.update({
+
+        status: "countdown"
+
+    });
+
+}
+
+
+}
 
 /* ==========================================
    Show Leaderboard
@@ -1298,7 +1320,9 @@ playAgainBtn.addEventListener(
 "click",
 () => {
 
-    resetCurrentPlayer();
+    playerRef.update({
+        ready: true
+    });
 
 });
 
@@ -1452,6 +1476,8 @@ window.addEventListener(
     startRealtimeSync();
 
     startRoomListeners();
+
+    checkRestartReady(player);
 
     loadGlobalHighscores();
 
