@@ -543,7 +543,7 @@ let survivalTime = 0;
 let scoreTimer = null;
 let timeTimer = null;
 
-const gravity = 0.75;
+const gravity = 0.45;
 
 /* ==========================================
    Player
@@ -686,7 +686,7 @@ function jump(){
 
     player.jumping = true;
 
-    player.velocityY = -15;
+    player.velocityY = -12;
 
     jumpSound.currentTime = 0;
 
