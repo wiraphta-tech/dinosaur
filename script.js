@@ -398,8 +398,6 @@ readyBtn.addEventListener("click", () => {
 
 });
 
-
-
 /* ==========================================
    Auto Join From URL
 ========================================== */
@@ -615,11 +613,6 @@ function startGame(){
     gameContainer.classList
     .remove("hidden");
 
-    document
-    .getElementById("deadMessage")
-    .classList
-    .add("hidden");
-
     gameRunning = true;
 
     score = 0;
@@ -653,11 +646,6 @@ function startGame(){
     },1000);
 
     gameLoop();
-    
-    document
-    .getElementById("deadMessage")
-    .classList
-    .add("hidden");
 
 }
 
@@ -974,27 +962,33 @@ function gameOver(){
 
         playerRef.update({
 
-            alive:false,
+            alive: false,
 
-            score:score,
+            score: score,
 
-            time:survivalTime
+            time: survivalTime
 
         });
 
-        document
-        .getElementById("deadMessage")
-        .classList
-        .remove("hidden");
-
     }
-    
-    deadMessage.classList.remove("hidden");
+
+    setTimeout(() => {
+
+        gameContainer.classList
+        .add("hidden");
+
+        if(
+            typeof showLeaderboard
+            === "function"
+        ){
+
+            showLeaderboard();
+
+        }
+
+    },1500);
 
 }
-
-
-
 
 /* ==========================================
    Main Loop
@@ -1135,20 +1129,23 @@ function updateRemoteScores(players){
 
 function checkRoomFinished(players){
 
-    const list = Object.values(players);
+    const list =
+    Object.values(players);
 
     const alivePlayers =
     list.filter(
         p => p.alive === true
     );
 
-    console.log("Alive:", alivePlayers.length);
+    if(
+        alivePlayers.length === 0
+    ){
 
-    if(alivePlayers.length === 0){
+        setTimeout(() => {
 
-        console.log("SHOW LEADERBOARD");
+            showLeaderboard();
 
-        showLeaderboard();
+        },1000);
 
     }
 
