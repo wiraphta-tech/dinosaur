@@ -264,6 +264,13 @@ button:hover{
     margin-bottom:8px;
 }
 
+#deadMessage{
+    text-align:center;
+    margin-top:20px;
+    color:white;
+    font-size:24px;
+}
+
 .hidden{
     display:none !important;
 }
