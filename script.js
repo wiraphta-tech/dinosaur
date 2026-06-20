@@ -1135,18 +1135,18 @@ function updateRemoteScores(players){
 
 function checkRoomFinished(players){
 
-    const list =
-    Object.values(players);
+    const list = Object.values(players);
 
     const alivePlayers =
     list.filter(
         p => p.alive === true
     );
 
+    console.log("Alive:", alivePlayers.length);
+
     if(alivePlayers.length === 0){
 
-        gameContainer.classList
-        .add("hidden");
+        console.log("SHOW LEADERBOARD");
 
         showLeaderboard();
 
